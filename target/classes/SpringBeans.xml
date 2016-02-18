@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+	<bean id="airport" class="com.anna.app.Airport" />
+	<bean id="lena" class="com.anna.app.AdministratorLena" />
+	<bean id="pavlo" class="com.anna.app.BadboyPavlo" />
+	<bean id="contestantDelegate" class="com.anna.app.GraciousContestant" />
+	
+	<bean class="com.anna.app.ContestantIntroducer"/>
+	
+	<bean id="boing" class="com.anna.app.Boing">
+		<constructor-arg value="1000" />
+	</bean>
+	<aop:aspectj-autoproxy />
+	
+
+	<aop:config>
+		<aop:aspect>
+			<aop:declare-parents types-matching="com.anna.app.Airplane+"
+				implement-interface="com.anna.app.Contestant" delegate-ref="contestantDelegate" />
+		</aop:aspect>
+	</aop:config>
+
+
+</beans>
